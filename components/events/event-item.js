@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Button from "../ui/button";
+
+import styles from "./event-item.module.css";
 
 function EventItem({ item }) {
   const humanReadableDate = new Date(item.date).toLocaleDateString("en-Us", {
@@ -14,20 +17,21 @@ function EventItem({ item }) {
   // it is the CONTENT of the public folder will be served by next js
   // so we dont need to prepend / with public
   return (
-    <li>
+    <li className={styles.item}>
       <img src={"/" + item.image} alt={item.title} />
-      <div>
-        <div>
+      <div className={styles.content}>
+        <div className={styles.summary}>
           <h2>{item.title}</h2>
-          <div>
+          <div className={styles.date}>
             <time>{humanReadableDate}</time>
           </div>
-          <div>
+          <div className={styles.address}>
             <address>{formattedLocation}</address>
           </div>
-          <Link href={exploreLink}>Explore event</Link>
         </div>
-        <div></div>
+        <div className={styles.actions}>
+          <Button link={exploreLink}>Explore event</Button>
+        </div>
       </div>
     </li>
   );
